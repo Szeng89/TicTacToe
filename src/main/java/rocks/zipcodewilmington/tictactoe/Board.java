@@ -11,6 +11,7 @@ public class Board {
 
     public Boolean isInFavorOfX() {
         int xCount = 0;
+        boolean rows = false;
 
         for (int i = 0; i < matrix.length; i ++){
             for(int j = 0; j < matrix.length; j++){
@@ -19,12 +20,29 @@ public class Board {
                 }
 
             }
+            if (xCount == 3){
+                rows = true;
+            }
         }
-        return null;
+        return rows;
     }
 
     public Boolean isInFavorOfO() {
-        return null;
+        int oCount = 0;
+        boolean rows = false;
+
+        for (int i = 0; i < matrix.length; i ++){
+            for(int j = 0; j < matrix.length; j++){
+                if(matrix[i][j] == 'O') {
+                    oCount++;
+                }
+
+            }
+            if (oCount == 3){
+                rows = true;
+            }
+        }
+        return rows;
     }
 
     public Boolean isTie() {

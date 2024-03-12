@@ -5,96 +5,97 @@ package rocks.zipcodewilmington.tictactoe;
  */
 public class Board {
     private Character[][] matrix;
+
     public Board(Character[][] matrix) {
-        this.matrix =matrix;
+        this.matrix = matrix;
     }
 
     public Boolean isInFavorOfX() {
-        int xCount = 0;
-        boolean xWins = false;
-
-
-        for (int i = 0; i < matrix.length; i ++) {
-            for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] == 'X') {
-                    xCount++;
+        // Check rows
+        for(int i = 0; i < 3; i++){
+            int rowCount = 0;
+            for(int j = 0; j < 3; j++){
+                if(matrix[i][j] == 'X'){
+                    rowCount++;
                 }
-
             }
-            if (xCount == 3) {
-                xWins = true;
-                xCount = 0;
-            }
-
-
-            // Diagonals
-            if (matrix[0][0] == 'X' && matrix[1][1] == 'X' && matrix[2][2] == 'X') {
-                xWins = true;
-
-            }
-
-            if (matrix[2][0] == 'X' && matrix[1][1] == 'X' && matrix[0][2] == 'X') {
-                xWins = true;
-
-            }
+            if(rowCount == 3) return true;
         }
 
-        return xWins;
+        // Check columns
+        for(int i = 0; i < 3; i++){
+            int colCount = 0;
+            for(int j = 0; j < 3; j++){
+                if(matrix[j][i] == 'X'){
+                    colCount++;
+                }
+            }
+            if(colCount == 3) return true;
+        }
+
+        // Check left diagonal
+        if(matrix[0][0] == 'X' && matrix[1][1] == 'X' && matrix[2][2] == 'X') return true;
+
+        // Check right diagonal
+        if(matrix[0][2] == 'X' && matrix[1][1] == 'X' && matrix[2][0] == 'X') return true;
+
+        // No win found
+        return false;
     }
 
+
     public Boolean isInFavorOfO() {
-        int oCount = 0;
-        boolean Owins = false;
-
-
-        for (int i = 0; i < matrix.length; i ++) {
-            for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] == 'O') {
-                    oCount++;
+        // Check rows
+        for(int i = 0; i < 3; i++){
+            int rowCount = 0;
+            for(int j = 0; j < 3; j++){
+                if(matrix[i][j] == 'O'){
+                    rowCount++;
                 }
-
             }
-            if (oCount == 3) {
-                Owins = true;
-                oCount = 0;
-            }
-
-
-            // Diagonals
-            if (matrix[0][0] == 'O' && matrix[1][1] == 'O' && matrix[2][2] == 'O') {
-                Owins = true;
-
-            }
-
-            if (matrix[2][0] == 'O' && matrix[1][1] == 'O' && matrix[0][2] == 'O') {
-                Owins = true;
-
-            }
+            if(rowCount == 3) return true;
         }
 
-        return Owins;
+        // Check columns
+        for(int i = 0; i < 3; i++){
+            int colCount = 0;
+            for(int j = 0; j < 3; j++){
+                if(matrix[j][i] == 'O'){
+                    colCount++;
+                }
+            }
+            if(colCount == 3) return true;
+        }
+
+        // Check left diagonal
+        if(matrix[0][0] == 'O' && matrix[1][1] == 'O' && matrix[2][2] == 'O') return true;
+
+        // Check right diagonal
+        if(matrix[0][2] == 'O' && matrix[1][1] == 'O' && matrix[2][0] == 'O') return true;
+
+        // No win found
+        return false;
     }
 
     public Boolean isTie() {
-        boolean tie = false;
-        if(isInFavorOfX() == isInFavorOfO()){
-            tie = true;
-        }
-        return tie;
+        boolean isTie = false;
 
+        if(isInFavorOfO() == false && isInFavorOfX() == false){
+            isTie = true;
+        }
+
+        return isTie;
     }
 
     public String getWinner() {
         String winner = "";
 
-        if(isInFavorOfO() && !isInFavorOfX()){
+
+        if(isInFavorOfO() == true){
             winner = "O";
-        } else if (isInFavorOfX() && !isInFavorOfO()) {
+        } else if (isInFavorOfX() == true) {
             winner = "X";
         }
-
-
-
         return winner;
     }
 
